@@ -1,0 +1,460 @@
+/* ===== СБРОС И БАЗОВЫЕ НАСТРОЙКИ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Determination Mono';
+    src: url('https://fonts.cdnfonts.com/css/determination-mono') format('woff2');
+    /* Запасной вариант — моноширинный с квадратными пропорциями */
+}
+
+body {
+    font-family: 'Determination Mono', 'Courier New', monospace;
+    color: #f5f5f5;
+    line-height: 1.5;
+    min-height: 100vh;
+    background: radial-gradient(circle at 30% 40%, #1a0b2e, #0d0b1a, #020214);
+    background-size: 300% 300%;
+    animation: gradientDrift 18s ease infinite alternate;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* анимированный градиент */
+@keyframes gradientDrift {
+    0% { background-position: 0% 0%; }
+    25% { background-position: 50% 30%; }
+    50% { background-position: 100% 60%; }
+    75% { background-position: 40% 80%; }
+    100% { background-position: 0% 100%; }
+}
+
+/* добавляем пиксельную текстуку поверх градиента (опционально) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(255,255,255,0.02) 2px, transparent 3px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ===== ТИПОГРАФИЯ ===== */
+h1, h2, h3 {
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0 #3d195b, 2px 2px 0 #ff6b6b;
+}
+
+h2 {
+    font-size: 2.3rem;
+    margin-bottom: 30px;
+    display: inline-block;
+    border-bottom: 4px solid #ff6b6b;
+    padding-bottom: 8px;
+}
+
+/* ===== ШАПКА ===== */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+    background: rgba(10, 5, 20, 0.6);
+    backdrop-filter: blur(6px);
+    border: 2px solid #4a2c6d;
+    border-radius: 0px; /* пиксельный стиль */
+    padding: 15px 25px;
+    box-shadow: 8px 8px 0 #0d031b;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-pixel {
+    width: 60px;
+    height: 60px;
+    background: #ff6b6b;
+    clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+    transition: transform 0.2s ease;
+}
+.logo-pixel:hover {
+    transform: rotate(5deg) scale(1.05);
+    filter: brightness(1.3);
+}
+
+.logo-text {
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 5px 5px 0 #b14eb2, 3px 3px 0 #ff6b6b;
+    line-height: 1;
+}
+.logo-small {
+    font-size: 0.8rem;
+    color: #c88ef5;
+    margin-left: 10px;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 25px;
+}
+
+.nav a {
+    color: #f0d3ff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    text-shadow: 2px 2px 0 #2e1642;
+}
+
+.nav a:hover {
+    border-bottom-color: #ffa914;
+    color: #ffffff;
+    filter: brightness(1.3);
+    transform: translateY(-2px);
+}
+
+/* ===== ГЛАВНЫЙ ЭКРАН ===== */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px 80px;
+    border: 4px dashed #7c5aa7;
+    margin: 40px 0;
+    background: rgba(0,0,0,0.25);
+    box-shadow: inset 0 0 40px #1d112b;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    word-break: break-word;
+}
+
+.hero-image {
+    max-width: 280px;
+    margin: 30px auto;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.hero-image:hover {
+    transform: scale(1.1) rotate(1deg);
+    filter: brightness(1.2);
+}
+.hero-image img {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    border: 6px solid #ff6b6b;
+}
+
+.btn {
+    display: inline-block;
+    background: #000000bb;
+    color: white;
+    font-size: 2rem;
+    padding: 15px 45px;
+    border: 4px solid #ff6b6b;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-top: 30px;
+    box-shadow: 8px 8px 0 #4f317a;
+    transition: 0.15s linear;
+    cursor: pointer;
+}
+.btn:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0 #ffa914;
+    background: #1a032b;
+    border-color: #f5d03d;
+    filter: brightness(1.2);
+}
+
+/* ===== СЕКЦИИ ===== */
+.section {
+    margin: 100px 0;
+    padding: 20px 0;
+}
+
+/* описание */
+.desc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+    background: rgba(18, 5, 35, 0.5);
+    border: 2px solid #5d3b81;
+    padding: 40px;
+}
+.desc-text {
+    flex: 1 1 300px;
+    font-size: 1.3rem;
+}
+.desc-text p {
+    margin: 20px 0;
+}
+.soul-icons {
+    flex: 0 1 200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+.soul-icon {
+    width: 60px;
+    height: 60px;
+    background: #ff6b6b;
+    clip-path: polygon(50% 0%, 80% 30%, 80% 70%, 50% 100%, 20% 70%, 20% 30%);
+    transition: 0.2s;
+}
+.soul-icon:hover {
+    transform: scale(1.2) rotate(10deg);
+    filter: brightness(1.5) drop-shadow(0 0 6px white);
+}
+.soul-icon.blue { background: #7efefe; }
+.soul-icon.green { background: #4bc39b; }
+.soul-icon.purple { background: #81257a; }
+.soul-icon.orange { background: #ffa914; }
+
+/* выбор пацифист/геноцид */
+.choice-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+}
+.choice-card {
+    flex: 1 1 300px;
+    max-width: 400px;
+    background: #130b1f;
+    border: 4px solid;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.25s;
+    box-shadow: 10px 10px 0 #00000070;
+}
+.choice-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    filter: brightness(1.2);
+    border-color: #ffffff;
+}
+.choice-card.pacifist { border-color: #4bc39b; }
+.choice-card.genocide { border-color: #ff6b6b; }
+.choice-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+.choice-card .card-img {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+    transition: 0.3s;
+}
+.choice-card .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+.choice-card .card-img:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* персонажи */
+.char-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.char-item {
+    flex: 0 1 150px;
+    text-align: center;
+    background: rgba(45, 20, 70, 0.7);
+    padding: 20px 10px;
+    border: 3px solid #a27bcb;
+    transition: 0.2s;
+    cursor: default;
+}
+.char-item:hover {
+    transform: scale(1.05) rotate(0.5deg);
+    border-color: #f5d03d;
+    background: #2e1749;
+    filter: brightness(1.3);
+}
+.char-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 15px;
+    border-radius: 0;
+    image-rendering: pixelated;
+    transition: 0.2s;
+}
+.char-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    border: 3px solid #ffa914;
+}
+.char-item:hover .char-avatar {
+    transform: scale(1.15);
+}
+.char-quote {
+    font-size: 0.9rem;
+    background: #0d031b;
+    padding: 8px;
+    border-left: 4px solid #ff6b6b;
+}
+
+/* саундтрек */
+.track-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    background: #03000c;
+    padding: 40px 20px;
+    border: 3px solid #8f5ed6;
+}
+.track-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.2s;
+}
+.track-item:hover {
+    filter: brightness(1.3);
+    transform: translateY(-5px);
+}
+.track-cover {
+    width: 130px;
+    height: 130px;
+    background: #251a36;
+    border: 4px solid white;
+    transition: 0.2s;
+}
+.track-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+.track-cover:hover {
+    transform: scale(1.15) rotate(-3deg);
+    border-color: #ffa914;
+}
+.track-name {
+    margin-top: 15px;
+    font-size: 1.3rem;
+}
+
+/* отзывы */
+.reviews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.review-card {
+    flex: 1 1 250px;
+    background: #1f1333;
+    border: 3px solid #9173b3;
+    padding: 20px;
+    font-style: italic;
+    transition: 0.2s;
+}
+.review-card:hover {
+    background: #2d194b;
+    border-color: #f5d03d;
+    transform: scale(1.02);
+}
+.review-author {
+    margin-top: 15px;
+    color: #beb1ff;
+}
+
+/* нижний CTA */
+.cta-bottom {
+    background: #00000080;
+    border: 6px double #ff6b6b;
+    padding: 60px 20px;
+    text-align: center;
+    margin: 80px 0 40px;
+}
+.cta-bottom h2 {
+    border-bottom: none;
+    font-size: 3rem;
+}
+
+/* подвал */
+.footer {
+    margin-top: 80px;
+    padding: 40px 0 20px;
+    border-top: 4px solid #4a2c6d;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    font-size: 0.9rem;
+}
+.footer a {
+    color: #dbbaff;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.footer a:hover {
+    filter: brightness(1.5);
+    text-decoration: underline wavy #ff6b6b;
+}
+.footer-pixel {
+    font-size: 1.5rem;
+    cursor: default;
+}
+.footer-pixel:hover {
+    animation: shake 0.2s infinite;
+}
+@keyframes shake {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(-2px,2px); }
+    50% { transform: translate(2px,-2px); }
+    75% { transform: translate(-2px,-2px); }
+    100% { transform: translate(0,0); }
+}
+
+/* утилиты для картинок */
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
